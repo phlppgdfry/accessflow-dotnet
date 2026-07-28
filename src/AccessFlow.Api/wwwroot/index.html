@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10243e" />
+    <title>AccessFlow | Content quality, with a human in control</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="AccessFlow home">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <span>AccessFlow</span>
+        </a>
+        <p class="eyebrow">CONTENT QUALITY</p>
+        <nav>
+          <a class="nav-link active" href="#workspace">Overview</a>
+          <a class="nav-link" href="#queue">Review queue <span id="queue-count" class="nav-count">0</span></a>
+          <a class="nav-link" href="#principles">Guardrails</a>
+          <a class="nav-link" href="/openapi/v1.json" target="_blank" rel="noreferrer">OpenAPI</a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="status-dot" aria-hidden="true"></span>
+          <p><strong>Local demo</strong><br />Human review is always the final step.</p>
+        </div>
+      </aside>
+
+      <main id="workspace" class="workspace">
+        <header id="top" class="topbar">
+          <div>
+            <p class="eyebrow">ACCESSIBILITY REVIEW DESK</p>
+            <h1>Content that works for more people.</h1>
+          </div>
+          <button class="button button-primary" id="open-submit" type="button" data-testid="open-submit">Submit content</button>
+        </header>
+
+        <section class="intro-card" aria-labelledby="intro-title">
+          <div>
+            <p class="eyebrow">THE PRINCIPLE</p>
+            <h2 id="intro-title">Automate the checks. Keep people in control.</h2>
+            <p>AccessFlow turns practical accessibility checks into a calm review queue. Suggestions are transparent, auditable and never publish content on their own.</p>
+          </div>
+          <div class="principle-pill"><span aria-hidden="true">✦</span> AI only with consent</div>
+        </section>
+
+        <section class="metrics" aria-label="Content quality summary">
+          <article class="metric-card">
+            <span class="metric-label">Items in flow</span>
+            <strong id="metric-total">–</strong>
+            <span class="metric-copy">all submitted content</span>
+          </article>
+          <article class="metric-card attention">
+            <span class="metric-label">Need a review</span>
+            <strong id="metric-review">–</strong>
+            <span class="metric-copy">human decision required</span>
+          </article>
+          <article class="metric-card good">
+            <span class="metric-label">Approved</span>
+            <strong id="metric-approved">–</strong>
+            <span class="metric-copy">ready to progress</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">High-priority findings</span>
+            <strong id="metric-findings">–</strong>
+            <span class="metric-copy">resolve before publishing</span>
+          </article>
+        </section>
+
+        <section id="queue" class="queue-section" aria-labelledby="queue-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">REVIEW QUEUE</p>
+              <h2 id="queue-title">Make the next good decision.</h2>
+            </div>
+            <span class="legend"><span class="legend-dot high"></span> High priority</span>
+          </div>
+          <div id="review-queue" class="review-queue" aria-live="polite"></div>
+        </section>
+
+        <section id="principles" class="guardrails" aria-labelledby="guardrails-title">
+          <div>
+            <p class="eyebrow">BUILT-IN GUARDRAILS</p>
+            <h2 id="guardrails-title">A useful AI boundary is a product feature.</h2>
+          </div>
+          <ul>
+            <li><strong>Consent first.</strong> No AI suggestion when a submitter has not opted in.</li>
+            <li><strong>Provider-neutral.</strong> The review workflow works without coupling to one model vendor.</li>
+            <li><strong>Human finality.</strong> Suggestions inform a reviewer; they never change publication status.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="submit-dialog" aria-labelledby="submit-title">
+      <form id="submit-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">NEW CONTENT ITEM</p>
+            <h2 id="submit-title">Start a quality review</h2>
+          </div>
+          <button class="icon-button" id="close-submit" type="button" aria-label="Close form">×</button>
+        </div>
+        <p class="dialog-copy">Submit a small HTML sample. AccessFlow will create a review item and explain the detected checks.</p>
+        <label>Title<input name="title" required value="School event update" /></label>
+        <label>Source URL<input name="sourceUrl" required type="url" value="https://example.org/events" /></label>
+        <label>Submitted by<input name="submittedBy" required value="Philippe Godfroy" /></label>
+        <label>HTML sample<textarea name="html" required rows="6"><html><head><title>School event</title></head><body><h1>School event</h1><h3>Practical information</h3><img src="auditorium.jpg"><a href="/register">Klik hier</a></body></html></textarea></label>
+        <label class="checkbox-label"><input name="aiConsent" type="checkbox" checked /> This content may receive an AI-assisted suggestion after review.</label>
+        <p class="form-error" id="form-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button class="button button-ghost" id="cancel-submit" type="button">Cancel</button>
+          <button class="button button-primary" type="submit" data-testid="submit-content">Create review item</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="item-template">
+      <article class="review-card">
+        <div class="review-card-head">
+          <div>
+            <p class="item-source"></p>
+            <h3 class="item-title"></h3>
+          </div>
+          <span class="status-label"></span>
+        </div>
+        <div class="finding-summary"></div>
+        <div class="finding-list"></div>
+        <div class="suggestion-box" hidden></div>
+        <div class="card-actions">
+          <button class="button button-ghost suggestion-button" type="button">Get safe suggestion</button>
+          <button class="button button-ghost changes-button" type="button">Request changes</button>
+          <button class="button button-primary approve-button" type="button">Approve</button>
+        </div>
+      </article>
+    </template>
+    <script src="/app.js"></script>
+  </body>
+</html>
