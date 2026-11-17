@@ -1,5 +1,11 @@
 # AccessFlow
 
+<!-- showcase:start -->
+> **[▶ Try the checks live](https://phlppgdfry.github.io/accessflow-dotnet/)** — paste HTML in your browser and see the same six rules as the C# service, plus the review and consent flow. Screenshots of the real app are on the page.
+
+[![Try the checks live: accessflow-dotnet](site/demo.png)](https://phlppgdfry.github.io/accessflow-dotnet/)
+<!-- showcase:end -->
+
 > **Content quality, with a human in control.**
 
 [![CI](https://github.com/phlppgdfry/accessflow-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/phlppgdfry/accessflow-dotnet/actions/workflows/ci.yml)

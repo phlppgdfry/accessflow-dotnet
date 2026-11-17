@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AccessFlow — accessibility checks with a human in control</title>
+<meta name="description" content="A .NET 10 review desk that turns six deterministic accessibility checks into an auditable queue. AI suggestions only with consent; a person always decides. Try the checks live in your browser.">
+<link rel="canonical" href="https://phlppgdfry.github.io/accessflow-dotnet/">
+<meta property="og:type" content="website"><meta property="og:title" content="AccessFlow — accessibility checks with a human in control"><meta property="og:description" content="A .NET 10 review desk that turns six deterministic accessibility checks into an auditable queue. AI suggestions only with consent; a person always decides. Try the checks live in your browser.">
+<meta property="og:url" content="https://phlppgdfry.github.io/accessflow-dotnet/"><meta property="og:image" content="https://phlppgdfry.github.io/accessflow-dotnet/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0d12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b8cff'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/showcase.css">
+<style>:root{--brand:#5b8cff;--accent-ink:#050b1a}
+.af-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:22px}
+.af-grid>*{min-width:0}
+@media (max-width:900px){.af-grid{grid-template-columns:1fr}}
+.af-check{display:flex!important;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px!important;color:var(--fg)!important}
+.af-check input{width:auto!important;margin-top:4px;accent-color:var(--accent)}
+.af-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.af-sum{font-weight:600;font-size:17px}
+.af-list{display:grid;gap:8px;max-height:430px;overflow:auto;padding-right:2px}
+.af-f{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 12px}
+.af-f.high{border-left-color:var(--bad)}
+.af-ft{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.af-rec{font-size:14px;margin:6px 0}
+.af-ev{display:block;font-size:12px;color:var(--muted);background:var(--card);border:1px dashed var(--line2);border-radius:6px;padding:4px 7px;overflow-wrap:anywhere}
+.af-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.af-actions .btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.af-suggest{margin-top:12px;background:color-mix(in srgb,var(--info) 10%,var(--bg2));border:1px solid color-mix(in srgb,var(--info) 35%,var(--line));border-radius:10px;padding:12px;font-size:14px}
+.af-suggest b{display:block;margin-bottom:4px}
+.af-audit{margin:6px 0 0;padding:0;list-style:none;font-size:13px;color:var(--muted);max-height:150px;overflow:auto}
+.af-audit li{padding:5px 0;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="brand" href="#"><i class="dot"></i><span>AccessFlow</span></a>
+  <nav><a class="" href="#demo">Try it</a><a class="" href="#how">How it works</a><a class="hide-sm" href="#screens">Screens</a><a class="hide-sm" href="#run">Run it</a><a href="https://github.com/phlppgdfry/accessflow-dotnet" aria-label="GitHub repository">GitHub</a><button class="theme" type="button" aria-label="Toggle light or dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></nav>
+</div></div>
+<main>
+<header class="hero"><div class="wrap grid">
+  <div>
+    <div class="kicker"><span>.NET 10 · ASP.NET Core · accessibility</span><span class="chip status">Prototype</span></div>
+    <h1>Automate the checks. <em>Keep people in control.</em></h1>
+    <p class="lede">AccessFlow is a review desk for teams that publish for schools, public services and social organisations. It runs transparent accessibility checks on submitted HTML, queues the result for a reviewer, and only offers an AI suggestion when the editor opted in. Nothing publishes itself.</p>
+    <div class="ctas"><a class="btn primary" href="#demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Try the checks</a><a class="btn" href="https://github.com/phlppgdfry/accessflow-dotnet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg> Source on GitHub</a></div>
+    <div class="stack"><span class="chip">.NET 10</span><span class="chip">ASP.NET Core minimal API</span><span class="chip">Clean architecture</span><span class="chip">xUnit</span><span class="chip">GitHub Actions</span></div>
+  </div>
+  <div class="hero-visual"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>localhost:5000 · AccessFlow review desk</b></div><img src="img/accessflow-dotnet-shots-overview.webp" alt="AccessFlow" width="1600" height="1000"></div><div class="caption">The real app, running locally with its seeded demo content.</div></div>
+</div></header>
+<section id="why"><div class="wrap">
+  <p class="eyebrow">Why it exists</p><h2>An automated checker is useful. An automated publisher is a liability.</h2>
+  <div class="problem">
+    <div class="card before"><div class="label">Without it</div><p>Accessibility scanners either flood editors with jargon or get treated as a conformance certificate. AI tools rewrite content without asking, and nobody can tell afterwards who approved what.</p></div>
+    <div class="card after"><div class="label">With it</div><p>Six plain checks, each with a rule code, a severity and advice an editor understands. Every item waits for a human decision that is recorded. AI help is opt-in per item and can only suggest, never change the publication status.</p></div>
+  </div>
+</div></section>
+<section id="demo"><div class="wrap">
+  <p class="eyebrow">Try it · runs in your browser</p><h2>Paste HTML, see what a reviewer would see</h2>
+  <p class="sub">These are the same six rules as the C# <code>ContentInspectionService</code>, ported to JavaScript. Both implementations answer a shared set of test cases in CI, so this page cannot drift from the API. Edit the HTML, toggle AI consent, then approve or request changes.</p>
+  <div class="demo"><div class="tabs" role="tablist" id="af-presets"></div>
+<div class="af-grid">
+  <div>
+    <label for="af-html">HTML submitted by an editor</label>
+    <textarea id="af-html" spellcheck="false" style="min-height:300px"></textarea>
+    <label class="af-check"><input type="checkbox" id="af-consent"> The editor allows an AI-assisted suggestion for this item</label>
+  </div>
+  <div>
+    <div class="af-head">
+      <div><div class="small dim">Automated checks</div><div id="af-summary" class="af-sum"></div></div>
+      <span id="af-status" class="pill warn">Needs review</span>
+    </div>
+    <div id="af-findings" class="af-list"></div>
+    <div class="af-actions">
+      <button type="button" class="btn" id="af-suggest">Get safe suggestion</button>
+      <button type="button" class="btn" id="af-changes">Request changes</button>
+      <button type="button" class="btn primary" id="af-approve">Approve</button>
+    </div>
+    <div id="af-suggestion" class="af-suggest" hidden></div>
+    <div class="small dim" style="margin-top:16px">Audit trail</div>
+    <ol id="af-audit" class="af-audit"></ol>
+  </div>
+</div>
+</div>
+  <p class="note">Findings are in Dutch because the app targets Flemish public-sector content; the grey line under each gives the English meaning. Each finding shows the exact markup the rule matched. The suggestion here is a canned, rule-based text: the real API keeps a provider-neutral adapter and calls no external model in the demo.</p>
+</div></section>
+<section id="how"><div class="wrap">
+  <p class="eyebrow">How it works</p><h2>A small backend with deliberate boundaries</h2>
+  
+  <div class="cards"><div class="card"><div class="ic">01</div><h3>Deterministic checks first</h3><p>Document language, page title, main landmark, heading order, image alt text and vague link labels. Regex-based, explainable and tested, see <a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/main/docs/adr/002-deterministic-rules-before-ai.md">ADR 002</a>.</p></div><div class="card"><div class="ic">02</div><h3>Human review is the control point</h3><p>Items start as <em>Needs review</em>. Approve or request changes is an explicit, recorded decision with reviewer, time and note (<a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/main/docs/adr/001-human-review-is-the-control-point.md">ADR 001</a>).</p></div><div class="card"><div class="ic">03</div><h3>AI only with consent</h3><p>The suggestion endpoint refuses items without consent. Suggestions inform a reviewer and never touch publication status.</p></div><div class="card"><div class="ic">04</div><h3>Clean separation</h3><p>Domain, Application, Infrastructure and API projects. Warnings as errors, a formatting gate and CI on every push.</p></div></div>
+  <h3 style="margin:34px 0 14px">The flow, step by step</h3><div class="flow" role="list"><div class="node"><div class="n">01</div><b>Editor submits</b><small>title, source URL, HTML and an AI-consent flag</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node hl"><div class="n">02</div><b>Inspection</b><small>six rules return code, severity, detail and advice</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">03</div><b>Review queue</b><small>status Needs review, high-priority count on the dashboard</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">04</div><b>Optional suggestion</b><small>only when the editor consented</small></div><div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="node"><div class="n">05</div><b>Human decision</b><small>approve or request changes, recorded with reviewer and time</small></div></div>
+</div></section>
+<section id="screens"><div class="wrap">
+  <p class="eyebrow">Screens</p><h2>What it looks like</h2>
+  <p class="sub">Screenshots from the actual ASP.NET Core app, captured with Playwright against a local run.</p>
+  <div class="gallery"><figure data-zoom="Findings a reviewer can act on — Rule code, plain-language title and the recommended fix. High severity in orange."><div class="frame"><img src="img/accessflow-dotnet-shots-findings.webp" alt="Findings a reviewer can act on" width="1600" height="936" loading="lazy" decoding="async"></div><figcaption><b>Findings a reviewer can act on</b> Rule code, plain-language title and the recommended fix. High severity in orange.</figcaption></figure><figure data-zoom="Submitting content — AI consent is an explicit checkbox, off by default."><div class="frame"><img src="img/accessflow-dotnet-shots-submit.webp" alt="Submitting content" width="1280" height="1412" loading="lazy" decoding="async"></div><figcaption><b>Submitting content</b> AI consent is an explicit checkbox, off by default.</figcaption></figure><figure data-zoom="Suggestion with consent — Shown next to the findings; the status stays Needs review."><div class="frame"><img src="img/accessflow-dotnet-shots-suggestion.webp" alt="Suggestion with consent" width="1600" height="772" loading="lazy" decoding="async"></div><figcaption><b>Suggestion with consent</b> Shown next to the findings; the status stays Needs review.</figcaption></figure><figure data-zoom="On a phone — The same desk on a 390-pixel screen."><div class="frame"><img src="img/accessflow-dotnet-shots-mobile.webp" alt="On a phone" width="1170" height="2532" loading="lazy" decoding="async"></div><figcaption><b>On a phone</b> The same desk on a 390-pixel screen.</figcaption></figure></div>
+</div></section>
+<section id="evidence"><div class="wrap">
+  <p class="eyebrow">Evidence</p><h2>What is real, and what is not</h2>
+  <p class="sub">While building this page, the screenshots exposed two front-end bugs and the parity check exposed three rule gaps. All five are fixed and covered by tests.</p>
+  <div class="metrics"><div class="metric"><div class="v">18</div><div class="l">automated tests</div><div class="s">including 8 cases shared with the browser port</div></div><div class="metric"><div class="v">6</div><div class="l">accessibility rules</div><div class="s">AF-001 to AF-006, each with a rule code</div></div><div class="metric"><div class="v">0</div><div class="l">external services</div><div class="s">no model, database or cloud account needed to run it</div></div></div>
+  <div class="honest" style="margin-top:18px">
+      <div class="card real"><h3><span class="pill ok">REAL</span> Built and verified</h3><ul><li>.NET 10 API, review workflow and dependency-free UI, run locally for these screenshots</li><li>Rule engine with unit tests; formatting and build gates in CI</li><li>Consent check on the suggestion endpoint and recorded review decisions</li><li>Fixed in this pass: advice text was injected as HTML, the submit form crashed after saving, and the page scrolled sideways on phones</li></ul></div>
+      <div class="card sim"><h3><span class="pill warn">SIMULATED</span> Mocked or not built yet</h3><ul><li>Storage is in memory: restarting the API resets the queue</li><li>The AI suggestion uses a placeholder adapter, not a real model</li><li>Six regex checks are a triage aid, not a WCAG conformance audit</li><li>No authentication: the reviewer name is fixed in the demo</li></ul></div></div>
+</div></section>
+<section id="run"><div class="wrap two">
+  <div><p class="eyebrow">Run it yourself</p><h2>Run it locally</h2>
+  <p class="sub">Requires the .NET 10 SDK. No database, cloud account or model key.</p>
+  <div class="code"><button class="copy" type="button">Copy</button><pre><code>git clone https://github.com/phlppgdfry/accessflow-dotnet
+cd accessflow-dotnet
+dotnet run --project src/AccessFlow.Api
+<span class="c"># open the URL ASP.NET Core prints (usually http://localhost:5000)</span>
+
+<span class="c"># quality gates, as in CI</span>
+dotnet test AccessFlow.slnx
+dotnet format AccessFlow.slnx --verify-no-changes
+node scripts/check-browser-port.mjs   # browser port = C# rules</code></pre></div></div>
+  <div><p class="eyebrow">Go deeper</p><h2>Read the source</h2>
+  <div class="links"><a href="https://github.com/phlppgdfry/accessflow-dotnet"><span>Repository</span><span>github</span></a><a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/HEAD/docs/architecture.md"><span>Architecture and production path</span><span>docs</span></a><a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/HEAD/docs/adr/001-human-review-is-the-control-point.md"><span>ADR 001: human review is the control point</span><span>adr</span></a><a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/HEAD/docs/adr/002-deterministic-rules-before-ai.md"><span>ADR 002: deterministic rules before AI</span><span>adr</span></a><a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/HEAD/src/AccessFlow.Application/ContentInspectionService.cs"><span>The six rules in C#</span><span>cs</span></a><a href="https://github.com/phlppgdfry/accessflow-dotnet/blob/HEAD/tests/parity/inspection-cases.json"><span>Shared parity cases</span><span>json</span></a></div></div>
+</div></section></main>
+<footer><div class="wrap">
+  <span>AccessFlow · A portfolio project by Philippe Godfroy</span>
+  <span><a href="https://www.philippegodfroy.com/work">More projects</a> · <a href="https://github.com/phlppgdfry/accessflow-dotnet">Source</a></span>
+</div></footer>
+<script src="assets/showcase.js"></script>
+<script src="assets/demo.js" type="module"></script>
+</body></html>
