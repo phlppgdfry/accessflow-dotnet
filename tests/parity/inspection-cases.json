@@ -1,0 +1,66 @@
+{
+  "description": "Shared fixtures: ContentInspectionService (C#) and site/assets/rules.js (browser port) must return exactly these rule codes, in this order.",
+  "cases": [
+    {
+      "name": "Bare fragment",
+      "html": "<p>bare</p>",
+      "expected": [
+        "AF-001",
+        "AF-002",
+        "AF-003",
+        "AF-006"
+      ]
+    },
+    {
+      "name": "Well-formed page",
+      "html": "<html lang=\"nl\"><title>X</title><main><h1>a</h1></main></html>",
+      "expected": []
+    },
+    {
+      "name": "Upper case, whitespace-only title, skipped heading",
+      "html": "<HTML LANG=nl><TITLE> </TITLE><Main class=x><H1>a</H1><h3>b</h3></Main>",
+      "expected": [
+        "AF-002",
+        "AF-006"
+      ]
+    },
+    {
+      "name": "Multi-line title, image without alt",
+      "html": "<html lang=\"nl\"><title>\nmulti\nline\n</title><main><h2>x</h2><img src=a alt=\"\"><img src=b></main>",
+      "expected": [
+        "AF-004",
+        "AF-006"
+      ]
+    },
+    {
+      "name": "data-lang and vague link",
+      "html": "<html data-lang=\"x\"><title>t</title><mainframe></mainframe><h1>a</h1><h2>b</h2><h3>c</h3><a href=#> Click Here </a>",
+      "expected": [
+        "AF-001",
+        "AF-003",
+        "AF-005"
+      ]
+    },
+    {
+      "name": "Second h1 then skip",
+      "html": "<html lang=en><title>t</title><main><h1>a</h1><a href=\"#\">read more about it</a><h1>b</h1><h3>c</h3></main>",
+      "expected": [
+        "AF-006"
+      ]
+    },
+    {
+      "name": "Empty lang, empty title, data-alt",
+      "html": "<html lang=''><title>  </title><main><h1>T</h1><img data-alt=x src=y></main>",
+      "expected": [
+        "AF-001",
+        "AF-002",
+        "AF-004"
+      ]
+    },
+    {
+      "name": "Attributes before lang, region subtag",
+      "html": "<HTML class='x' LANG=\"nl-BE\"><TITLE>\n Nieuws\n</TITLE><main><h1>T</h1></main>",
+      "expected": []
+    }
+  ]
+}

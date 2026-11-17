@@ -99,16 +99,19 @@ public sealed partial class ContentInspectionService
         return false;
     }
 
-    [GeneratedRegex("<html[^>]*\\blang\\s*=", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    // A real, non-empty lang attribute: "data-lang" or lang="" must not count.
+    [GeneratedRegex("<html\\b[^>]*\\slang\\s*=\\s*(?:\"[^\"\\s]+\"|'[^'\\s]+'|[^\\s\"'>]+)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex HtmlLanguageRegex();
 
-    [GeneratedRegex("<title[^>]*>\\s*.+?\\s*</title>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Singleline)]
+    // At least one visible character: a whitespace-only title is still an empty title.
+    [GeneratedRegex("<title[^>]*>\\s*[^<\\s][^<]*</title>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Singleline)]
     private static partial Regex TitleRegex();
 
     [GeneratedRegex("<main(?:\\s|>)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex MainRegex();
 
-    [GeneratedRegex("<img(?![^>]*\\balt\\s*=)[^>]*>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    // "data-alt" is not an alt attribute, so require whitespace before alt.
+    [GeneratedRegex("<img(?![^>]*\\salt\\s*=)[^>]*>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex ImageWithoutAltRegex();
 
     [GeneratedRegex("<a[^>]*>\\s*(klik hier|lees meer|click here|read more)\\s*</a>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]

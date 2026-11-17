@@ -26,6 +26,11 @@ jobs:
         run: dotnet build AccessFlow.slnx --configuration Release --no-restore
       - name: Test
         run: dotnet test AccessFlow.slnx --configuration Release --no-build --collect:"XPlat Code Coverage" --results-directory ./coverage
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Browser port matches the C# rules
+        run: node scripts/check-browser-port.mjs
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v4
