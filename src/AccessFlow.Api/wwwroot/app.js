@@ -26,7 +26,12 @@ function setMetrics(summary) {
 function makeFinding(finding) {
   const node = document.createElement("div");
   node.className = `finding ${severityClass[finding.severity] || "medium"}`;
-  node.innerHTML = `<strong>${finding.ruleCode} · ${finding.title}</strong><span>${finding.recommendation}</span>`;
+  // Text only: findings quote HTML such as <html lang="nl"> and must never be parsed as markup.
+  const heading = document.createElement("strong");
+  heading.textContent = `${finding.ruleCode} · ${finding.title}`;
+  const advice = document.createElement("span");
+  advice.textContent = finding.recommendation;
+  node.append(heading, advice);
   return node;
 }
 
@@ -77,7 +82,11 @@ async function showSuggestion(id, root) {
   const box = root.querySelector(".suggestion-box");
   try {
     const suggestion = await request(`/content-items/${id}/suggestion`, { method: "POST" });
-    box.innerHTML = `<strong>Safe suggestion</strong>${suggestion.summary}<br><small>${suggestion.safeguard}</small>`;
+    const label = document.createElement("strong");
+    label.textContent = "Safe suggestion";
+    const safeguard = document.createElement("small");
+    safeguard.textContent = suggestion.safeguard;
+    box.replaceChildren(label, document.createTextNode(suggestion.summary), document.createElement("br"), safeguard);
     box.hidden = false;
   } catch (error) {
     box.textContent = error.message;
@@ -90,13 +99,15 @@ document.querySelector("#close-submit").addEventListener("click", () => dialog.c
 document.querySelector("#cancel-submit").addEventListener("click", () => dialog.close());
 document.querySelector("#submit-form").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const form = new FormData(event.currentTarget);
+  // Keep a reference: event.currentTarget is null again after the first await.
+  const formElement = event.currentTarget;
+  const form = new FormData(formElement);
   const error = document.querySelector("#form-error");
   error.textContent = "";
   try {
     await request("/content-items", { method: "POST", body: JSON.stringify({ title: form.get("title"), sourceUrl: form.get("sourceUrl"), html: form.get("html"), submittedBy: form.get("submittedBy"), aiConsent: form.get("aiConsent") === "on" }) });
     dialog.close();
-    event.currentTarget.reset();
+    formElement.reset();
     await refresh();
   } catch (exception) {
     error.textContent = exception.message;
