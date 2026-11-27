@@ -29,6 +29,7 @@ const $ = id => document.getElementById(id);
 const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let state = 'Needs review', findings = [];
 
+// log() takes trusted HTML from this file; anything read from the page goes through esc().
 function log(text) {
   const li = document.createElement('li');
   li.innerHTML = `<span class="dim mono">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span> ${text}`;
@@ -65,7 +66,7 @@ $('af-presets').innerHTML = Object.keys(PRESETS).map(n => `<button type="button"
 function load(n) {
   $('af-html').value = PRESETS[n].html; $('af-consent').checked = PRESETS[n].consent;
   document.querySelectorAll('#af-presets button').forEach(b => b.setAttribute('aria-selected', b.textContent === n));
-  $('af-audit').innerHTML = ''; setStatus('Needs review'); run(); log(`Submitted “${n}”, AI consent: <b>${PRESETS[n].consent ? 'yes' : 'no'}</b>`);
+  $('af-audit').innerHTML = ''; setStatus('Needs review'); run(); log(`Submitted “${esc(n)}”, AI consent: <b>${PRESETS[n].consent ? 'yes' : 'no'}</b>`);
 }
 $('af-presets').addEventListener('click', e => e.target.tagName === 'BUTTON' && load(e.target.textContent));
 $('af-html').addEventListener('input', () => run(true));
